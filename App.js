@@ -7,23 +7,39 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import axios from 'axios';
+import {StyleSheet, Text, View} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      images: [{
+        id: '',
+        uri: '',
+      }]
+    }
+  }
+
+  getNasaImages(api_key){
+    axios
+    .get(`https://images-api.nasa.gov/search?q=mars&media_type=image`)
+    .then(response => {
+      console.log('DATA: ', response.data.collection.items)
+    })
+    .catch(e => console.log('ERROR: ', e))
+    return <Text>from here!</Text>
+  }
   render() {
+    var api_key = 'zCLX10v3Omg8jie4clKmFG7S5UPyKYiMdcZMW32l';
+    var hi = this.getNasaImages(api_key);
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        { hi }
+        <Text style={styles.welcome}>Welcome to NASA Native!</Text>
       </View>
     );
   }
@@ -40,10 +56,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
