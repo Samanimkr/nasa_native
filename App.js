@@ -28,7 +28,11 @@ export default class App extends Component {
     axios
     .get(`https://images-api.nasa.gov/search?q=mars&media_type=image`)
     .then(response => {
-      console.log('DATA: ', response.data.collection.items)
+      var nasa_id = response.data.collection.items[4].data[0].nasa_id;
+      var image_uri = `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`;
+      console.log('nasa_id: ', nasa_id);
+      console.log('uri: ', image_uri);
+      // console.log('DATA: ', response.data.collection.items[1])
     })
     .catch(e => console.log('ERROR: ', e))
     return <Text>from here!</Text>
