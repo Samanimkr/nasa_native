@@ -1,14 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import axios from 'axios';
-import {StyleSheet, Text, View, Image ,ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image ,ScrollView } from 'react-native';
+
+
+// Component Imports
+import { PlanetImages } from './components/PlanetImages';
 
 
 
@@ -17,9 +13,17 @@ export default class App extends Component {
     super();
 
     this.state = {
-      earth: [],
-      mars: [],
-      saturn: []
+      isDataAvailable: false,
+      earth: [{
+        id: '',
+        uri: '',
+        description: ''
+      }],
+      mars: [{
+        id: '',
+        uri: '',
+        description: ''
+      }],
     }
   }
 
@@ -27,38 +31,47 @@ export default class App extends Component {
     axios
     .get(`https://images-api.nasa.gov/search?q=mars&media_type=image`)
     .then(response => {
-      console.log('response: ', response);
-      var nasa_id = response.data.collection.items[6].data[0].nasa_id;
-      this.setState({
-        image_uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`
-      });
+      let images_data = [...response.data.collection.items];
+      let mars_images = [], nasa_id = '', image_uri = '';
 
-      console.log('nasa_id: ', nasa_id);
-      // console.log('DATA: ', response.data.collection.items[1])
+      for (let index = 0; index < 10; index++) {
+        nasa_id = images_data[index].data[0].nasa_id;
+
+        mars_images.push({
+          id: nasa_id,
+          uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
+          description: images_data[index].data[0].description
+        });
+      }
+
+      this.setState({
+        isDataAvailable: true,
+        mars: [...mars_images]
+      });
+      
     })
     .catch(e => console.log('ERROR: ', e))
   }
 
 
   render() {
-    // console.log('asdas', this.getNasaImages());
-    // var imageInfo = this.getNasaImages();
-    // setTimeout(() => {
-    //   console.log('imageInfo', imageInfo);
-    // }, 1000);
-    if (!this.state.image_uri){
+    if (!this.state.isDataAvailable){
       this.getNasaImages();
-    }
+    } 
+
+    console.log(PlanetImages);
     
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to NASA Native!</Text>
+        <PlanetImages welcome='HELLO!'/>
         <ScrollView contentContainerStyle={styles.scrollview}>
-          <Image style={styles.img} source={{uri: this.state.image_uri}}/>
-          <Image style={styles.img} source={{uri: this.state.image_uri}}/>
-          <Image style={styles.img} source={{uri: this.state.image_uri}}/>
-          <Image style={styles.img} source={{uri: this.state.image_uri}}/>
+          { this.state.isDataAvailable &&
+            this.state.mars.map(image => {
+              return <Image key={image.id} style={styles.img} source={{uri: image.uri}}/>;
+            })
+          }
         </ScrollView>
       </View>
     );
@@ -73,7 +86,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   scrollview: {
-    backgroundColor: 'red',
     flexDirection: 'column',
   },
   title: {
@@ -83,8 +95,8 @@ const styles = StyleSheet.create({
   },
   img: {
     flex: 1,
-    width: 250,
-    height: 200,
+    width: 300,
+    height: 230,
     marginTop: 15
   }
 });
