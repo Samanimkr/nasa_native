@@ -15,7 +15,7 @@ export default class PlanetImages extends Component {
                 id: '',
                 uri: '',
                 title: '',
-                description: ''
+                date: ''
             }],
         }
     }
@@ -26,16 +26,16 @@ export default class PlanetImages extends Component {
         .then(response => {
             let images_data = [...response.data.collection.items];
             let planet_images = [], nasa_id = '', image_uri = '';
-
+            
             for (let index = 0; index < 10; index++) {
-            nasa_id = images_data[index].data[0].nasa_id;
+                nasa_id = images_data[index].data[0].nasa_id;
 
-            planet_images.push({
-                id: nasa_id,
-                uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
-                title: images_data[index].data[0].title,
-                description: images_data[index].data[0].description
-            });
+                planet_images.push({
+                    id: nasa_id,
+                    uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
+                    title: images_data[index].data[0].title,
+                    date: images_data[index].data[0].date_created.substr(0,10)
+                });
             }
 
             this.setState({
@@ -55,20 +55,31 @@ export default class PlanetImages extends Component {
         } 
 
         return (
-            <ScrollView contentContainerStyle={styles.scrollview}>
-                { this.state.isDataAvailable &&
-                    this.state.images.map(image => {
-                        return <ImageCard key={image.id} uri={image.uri} title={image.title} description={image.description} />;
-                    })
-                }
-            </ScrollView>
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.scrollview}>
+                    { this.state.isDataAvailable &&
+                        this.state.images.map(image => {
+                            return <ImageCard key={image.id} uri={image.uri} title={image.title} date={image.date} />;
+                        })
+                    }
+                </ScrollView>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f5f5f5'
+    },
     scrollview: {
-      flexDirection: 'column',
+        flexDirection: 'column',
+        flexGrow: 1,
+        width: 375,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 10
     }
   });
   

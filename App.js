@@ -44,22 +44,18 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 36,
     alignItems: 'center',
-    backgroundColor: '#FCFCFF',
+    backgroundColor: '#FCFCFC',
   },
   title: {
     fontSize: 22,
     textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    fontSize: 16,
-    textAlign: 'left',
+    margin: 10
   },
   dropdown: {
     width: 300,
     padding: 5,
-    marginBottom: 10,
-    backgroundColor: '#f5f5f5',
+    marginBottom: 15,
+    backgroundColor: '#fff',
     borderRadius: 5, 
     borderColor: '#aaa', 
     borderWidth: 2
