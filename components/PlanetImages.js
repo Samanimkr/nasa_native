@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, Image ,ScrollView } from 'react-native';
 import axios from 'axios';
 
 export class PlanetImages extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             isDataAvailable: false,
+            currentPlanet: props.planet,
             images: [{
                 id: '',
                 uri: '',
@@ -35,6 +36,7 @@ export class PlanetImages extends Component {
 
             this.setState({
                 isDataAvailable: true,
+                currentPlanet: this.props.planet,
                 images: [...planet_images]
             });
             
@@ -42,10 +44,15 @@ export class PlanetImages extends Component {
         .catch(e => console.log('ERROR: ', e))
     }
 
+
     render(){
-        if (!this.state.isDataAvailable){
+        if (this.props.planet !== this.state.currentPlanet || !this.state.isDataAvailable){
             this.getNasaImages();
-          } 
+
+        } 
+
+        console.log('asd');
+        
 
         return (
             <ScrollView contentContainerStyle={styles.scrollview}>
