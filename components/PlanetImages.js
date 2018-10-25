@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image ,ScrollView } from 'react-native';
 import axios from 'axios';
 
-export class PlanetImages extends Component {
+import ImageCard from './ImageCard';
+
+export default class PlanetImages extends Component {
     constructor(props){
         super(props);
 
@@ -12,6 +14,7 @@ export class PlanetImages extends Component {
             images: [{
                 id: '',
                 uri: '',
+                title: '',
                 description: ''
             }],
         }
@@ -30,6 +33,7 @@ export class PlanetImages extends Component {
             planet_images.push({
                 id: nasa_id,
                 uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
+                title: images_data[index].data[0].title,
                 description: images_data[index].data[0].description
             });
             }
@@ -48,17 +52,13 @@ export class PlanetImages extends Component {
     render(){
         if (this.props.planet !== this.state.currentPlanet || !this.state.isDataAvailable){
             this.getNasaImages();
-
         } 
-
-        console.log('asd');
-        
 
         return (
             <ScrollView contentContainerStyle={styles.scrollview}>
                 { this.state.isDataAvailable &&
                     this.state.images.map(image => {
-                    return <Image key={image.id} style={styles.img} source={{uri: image.uri}}/>;
+                        return <ImageCard key={image.id} uri={image.uri} title={image.title} description={image.description} />;
                     })
                 }
             </ScrollView>
@@ -69,12 +69,6 @@ export class PlanetImages extends Component {
 const styles = StyleSheet.create({
     scrollview: {
       flexDirection: 'column',
-    },
-    img: {
-      flex: 1,
-      width: 350,
-      height: 260,
-      marginTop: 15
     }
   });
   
