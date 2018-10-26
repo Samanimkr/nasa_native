@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#555',
+    color: '#444',
     paddingVertical: 10
   },
   img: {

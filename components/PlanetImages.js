@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, ScrollView, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Dimensions, Text } from 'react-native';
 import axios from 'axios';
 
 import ImageCard from './ImageCard';
@@ -73,14 +73,12 @@ export default class PlanetImages extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F3F3F3',
+        backgroundColor: '#f3f3f3',
         flex: 1,
     },
     scrollview: {
         paddingTop: 10,
-        // flex: 1, //makes scrollview stop working
         paddingHorizontal: 24,
-        width: Dimensions.get('window').width
     }
   });
   

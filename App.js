@@ -20,7 +20,8 @@ export default class App extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to NASA Native!</Text>
 
-        <ModalDropdown 
+        <View style={{alignItems:'center'}}>
+          <ModalDropdown 
           style={styles.dropdown}
           textStyle={{fontSize: 18, color: '#444', margin: 0, padding: 0}}
           dropdownStyle={{width: 285, flex: 1}}
@@ -32,6 +33,8 @@ export default class App extends Component {
             planet: value
           })}
         />
+        </View>
+        
         
         <PlanetImages planet={this.state.planet}/>
       </View>
@@ -43,7 +46,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 36,
-    alignItems: 'center',
+    flexDirection: 'column',
+    // alignItems: 'center',
     // backgroundColor: 'red',
   },
   title: {
