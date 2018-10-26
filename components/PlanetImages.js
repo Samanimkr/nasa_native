@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Dimensions } from 'react-native';
 import axios from 'axios';
 
 import ImageCard from './ImageCard';
@@ -27,7 +27,6 @@ export default class PlanetImages extends Component {
         .then(response => {
             let images_data = [...response.data.collection.items];
             let planet_images = [], nasa_id = '', image_uri = '';
-            console.log(response);
             
             for (let index = 0; index < 10; index++) {
                 nasa_id = images_data[index].data[0].nasa_id;
@@ -60,7 +59,7 @@ export default class PlanetImages extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollview}>
-                {/* <Image style={styles.temp} source={{uri: 'https://images-assets.nasa.gov/image/a-sky-view-of-earth-from-suomi-npp_16611703184_o/a-sky-view-of-earth-from-suomi-npp_16611703184_o~orig.jpg'}}/>  */}
+                
                     { this.state.isDataAvailable &&
                         this.state.images.map(image => {
                             return <ImageCard key={image.id} uri={image.uri} title={image.title} date={image.date} desc={image.desc} />;
@@ -73,25 +72,15 @@ export default class PlanetImages extends Component {
 }
 
 const styles = StyleSheet.create({
-    temp: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: 350,
-        height: 500,
-        zIndex: 4
-    },
     container: {
+        backgroundColor: '#F3F3F3',
         flex: 1,
-        backgroundColor: '#f5f5f5'
     },
     scrollview: {
-        flexDirection: 'column',
-        flexGrow: 1,
-        width: 375,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        // flex: 1, //makes scrollview stop working
+        paddingHorizontal: 24,
+        width: Dimensions.get('window').width
     }
   });
   
