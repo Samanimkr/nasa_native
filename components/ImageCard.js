@@ -32,8 +32,11 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    borderColor: '#eee', 
-    borderWidth: 2,
+    // borderColor: '#eee', 
+    // borderWidth: 2,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 0},
     height: 300
   },
   title: {

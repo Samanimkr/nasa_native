@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, ScrollView, Image, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 import axios from 'axios';
 
 import ImageCard from './ImageCard';
@@ -12,7 +12,7 @@ export default class PlanetImages extends Component {
             isDataAvailable: false,
             currentPlanet: props.planet,
             images: [{
-                id: '',
+                key: '',
                 uri: '',
                 title: '',
                 date: '',
@@ -32,7 +32,7 @@ export default class PlanetImages extends Component {
                 nasa_id = images_data[index].data[0].nasa_id;
 
                 planet_images.push({
-                    id: nasa_id,
+                    key: nasa_id,
                     uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
                     title: images_data[index].data[0].title,
                     date: images_data[index].data[0].date_created.substr(0,10),
@@ -58,14 +58,23 @@ export default class PlanetImages extends Component {
 
         return (
             <View style={styles.container}>
-                <ScrollView contentContainerStyle={styles.scrollview}>
+                { this.state.isDataAvailable &&
+                    <FlatList
+                        style={styles.flatlist}
+                        data={this.state.images}
+                        renderItem={image => <ImageCard uri={image.item.uri} title={image.item.title} date={image.item.date} desc={image.item.desc} /> }
+                    />
+                }
+                
+
+                {/* <ScrollView contentContainerStyle={styles.scrollview}>
                 
                     { this.state.isDataAvailable &&
                         this.state.images.map(image => {
                             return <ImageCard key={image.id} uri={image.uri} title={image.title} date={image.date} desc={image.desc} />;
                         })
                     }
-                </ScrollView>
+                </ScrollView> */}
             </View>
         )
     }
@@ -76,9 +85,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#f3f3f3',
         flex: 1,
     },
-    scrollview: {
+    flatlist: {
         paddingTop: 10,
         paddingHorizontal: 24,
+        flex: 1
     }
   });
   
