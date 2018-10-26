@@ -65,16 +65,6 @@ export default class PlanetImages extends Component {
                         renderItem={image => <ImageCard uri={image.item.uri} title={image.item.title} date={image.item.date} desc={image.item.desc} /> }
                     />
                 }
-                
-
-                {/* <ScrollView contentContainerStyle={styles.scrollview}>
-                
-                    { this.state.isDataAvailable &&
-                        this.state.images.map(image => {
-                            return <ImageCard key={image.id} uri={image.uri} title={image.title} date={image.date} desc={image.desc} />;
-                        })
-                    }
-                </ScrollView> */}
             </View>
         )
     }
