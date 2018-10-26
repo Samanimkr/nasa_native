@@ -7,28 +7,34 @@ export default class ImageCard extends Component {
 
     this.state = {
       selectedText: this.props.defaultValue,
-      displayMenu: 'none'
+      showMenu: false
     }
+
   }
 
   _onPressButton(){
-    
+    this.setState({
+      showMenu: !this.state.showMenu
+    })
   }
 
   render(){
     return (
       <View>
-        <TouchableHighlight style={styles.container} onPress={this._onPressButton}>
+        <TouchableHighlight style={styles.container} onPress={() => this._onPressButton()}>
           <Text style={styles.buttonText}>{this.state.selectedText}</Text>
         </TouchableHighlight>
 
-        <FlatList
-          style={styles.flatlist}
-          data={[...this.props.options]}
-          renderItem={({item}) => (
-            <Text style={[styles.flatlistText, this.state.selectedText===item && {backgroundColor: '#eee'}]}>{item}</Text>
-          )}
-        />
+        { this.state.showMenu &&
+          <FlatList
+            style={styles.flatlist}
+            data={[...this.props.options]}
+            renderItem={({item}) => (
+              <Text style={[styles.flatlistText, this.state.selectedText===item && {backgroundColor: '#eee'}]}>{item}</Text>
+            )}
+          />
+        }
+        
 
       </View>
       
@@ -42,21 +48,20 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   flatlist: {
-    display: this.state.displayMenu,
-    position: 'relative',
-    bottom: 15,
+    position: 'absolute',
+    top: 38,
     left: 0,
-    height: 20,
-    overflow: 'scroll',
-    flex: 0
+    borderWidth: 2,
+    borderColor: '#eee',
+    borderTopWidth: 0,
+    backgroundColor: 'white',
+    width: 300,
+    zIndex: 3000
   },
   flatlistText: {
     fontSize: 18, 
     color: '#444',
     padding: 5,
-    borderWidth: 2,
-    borderTopWidth: 0,
-    borderColor: '#eee',
     flex: 1,
   },
   buttonText: {
