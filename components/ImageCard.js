@@ -4,18 +4,12 @@ import { StyleSheet, Text, View, Image, TouchableHighlight, Modal } from 'react-
 import ImageModal from "./ImageModal";
 
 export default class ImageCard extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
 
     this.state = {
       modalVisible: false
     }
-  }
-
-  onCardPress(){
-    this.setState({
-      modalVisible: true
-    });
   }
 
   onChangeVisibility(){
@@ -27,7 +21,7 @@ export default class ImageCard extends Component {
   render() {
     return (
       <View>
-        <TouchableHighlight onPress={() => this.onCardPress()} style={{marginBottom: 25}} underlayColor='#fff'>
+        <TouchableHighlight onPress={() => this.onChangeVisibility()} style={{marginBottom: 25}} underlayColor='#fff'>
           <View style={styles.card}>
             <Text style={styles.title} numberOfLines={1}>{this.props.title}</Text>
             <Image style={styles.img} onPress={this.onCardPress} source={{uri: this.props.uri}}/>

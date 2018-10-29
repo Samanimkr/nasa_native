@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, Dimensions } from 'react-native';
 
 export default class ImageModal extends Component {
-  constructor(props){
-    super(props);
-
-  }
-
   render() {
     return (
       <Modal
@@ -40,9 +35,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   img: {
-    flex: 1,
-    // height: 400,
-    // width: 400
+    flex: 1
   },
   date: {
     fontSize: 14,

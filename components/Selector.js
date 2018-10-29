@@ -10,11 +10,10 @@ export default class Selector extends Component {
       selectedText: this.props.defaultValue,
       showMenu: false,
     }
-
-    this.spinValue = new Animated.Value(0)
+    this.spinValue = new Animated.Value(1);
   }
 
-  _onPressButton(){
+  onPressButton(){
     this.setState({
       showMenu: !this.state.showMenu
     });
@@ -22,12 +21,13 @@ export default class Selector extends Component {
     this.spinArrow();
   }
 
-  _onSelectOption(option){
+  onSelectOption(option){
     this.setState({
       selectedText: option.item,
       showMenu: false
     });
     this.props.onSelect(option.item);
+    this.spinArrow();
   }
 
   spinArrow(){
@@ -38,7 +38,7 @@ export default class Selector extends Component {
         duration: 300,
         easing: Easing.linear
       }
-    ).start()
+    ).start();
   }
 
   render(){
@@ -49,7 +49,7 @@ export default class Selector extends Component {
 
     return (
       <View>
-        <TouchableHighlight style={styles.container} onPress={() => this._onPressButton()}>
+        <TouchableHighlight style={styles.container} onPress={() => this.onPressButton()}>
 
           <View>
             <Text style={styles.buttonText}>{this.state.selectedText}</Text>
@@ -67,15 +67,13 @@ export default class Selector extends Component {
             keyExtractor={item => item}
             renderItem={({item}) => (
               <Text
-                onPress={() => this._onSelectOption({item})}
+                onPress={() => this.onSelectOption({item})}
                 style={[styles.flatlistText, this.state.selectedText===item && {backgroundColor: '#eee'}]}>
                 {item}
               </Text>
             )}
           />
         }
-        
-
       </View>
       
     )
