@@ -7,6 +7,7 @@ import PlanetImages from './components/PlanetImages';
 import Selector from "./components/Selector";
 import ModalDropdown from 'react-native-modal-dropdown';
 
+
 export default class App extends Component {
   constructor(){
     super();
@@ -29,18 +30,6 @@ export default class App extends Component {
             options={['Earth', 'Mars','Saturn', 'Jupiter', 'Uranus', 'Neptune', 'Pluto']}
             onSelect={(value) => this.setState({planet: value})}
           />
-          {/* <ModalDropdown 
-          style={styles.dropdown}
-          textStyle={{fontSize: 18, color: '#444', margin: 0, padding: 0}}
-          dropdownStyle={{width: 285, flex: 1}}
-          dropdownTextStyle={{fontSize: 16}}
-          defaultValue='Earth'
-          animated
-          options={['Earth', 'Mars','Saturn', 'Jupiter', 'Uranus', 'Neptune', 'Pluto']}
-          onSelect={(index, value) => this.setState({
-            planet: value
-          })}
-        /> */}
         </View>
         
         

@@ -26,17 +26,18 @@ export default class PlanetImages extends Component {
         .get(`https://images-api.nasa.gov/search?q=${this.props.planet}&media_type=image`)
         .then(response => {
             let images_data = [...response.data.collection.items];
-            let planet_images = [], nasa_id = '', image_uri = '';
+            let planet_images = [], nasa_id = '', image_uri = '', image_data = '';
             
             for (let index = 0; index < 10; index++) {
-                nasa_id = images_data[index].data[0].nasa_id;
+                image_data = images_data[index].data[0];
+                nasa_id = image_data.nasa_id;
 
                 planet_images.push({
                     id: nasa_id,
                     uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
-                    title: images_data[index].data[0].title,
-                    date: images_data[index].data[0].date_created.substr(0,10),
-                    desc: images_data[index].data[0].description_508
+                    title: image_data.title,
+                    date: image_data.date_created.substr(0,10),
+                    desc: image_data.description_508
                 });
             }
 
