@@ -1,6 +1,6 @@
-export const deletePost = (id) => {
+export const changePlanet = (planetName) => {
   return {
-      type: 'DELETE_POST',
-      id
+      type: 'CHANGE_PLANET',
+      planetName
   }
 }
