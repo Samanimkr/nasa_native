@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./redux/configureStore";
 
-
 // Component Imports
 import PlanetImages from './components/PlanetImages';
 import Selector from "./components/Selector";
