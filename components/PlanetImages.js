@@ -32,7 +32,7 @@ export default class PlanetImages extends Component {
                 nasa_id = images_data[index].data[0].nasa_id;
 
                 planet_images.push({
-                    key: nasa_id,
+                    id: nasa_id,
                     uri: `https://images-assets.nasa.gov/image/${nasa_id}/${nasa_id}~orig.jpg`,
                     title: images_data[index].data[0].title,
                     date: images_data[index].data[0].date_created.substr(0,10),
@@ -61,6 +61,7 @@ export default class PlanetImages extends Component {
                 { this.state.isDataAvailable &&
                     <FlatList
                         style={styles.flatlist}
+                        keyExtractor={item => item.id }
                         data={this.state.images}
                         renderItem={image => <ImageCard uri={image.item.uri} title={image.item.title} date={image.item.date} desc={image.item.desc} /> }
                     />

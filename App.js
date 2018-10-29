@@ -23,7 +23,7 @@ export default class App extends Component {
 
         
         
-        <View style={{alignItems:'center'}}>
+        <View style={{alignItems:'center', position: 'relative', zIndex: 5}}>
           <Selector 
             defaultValue="Earth" 
             options={['Earth', 'Mars','Saturn', 'Jupiter', 'Uranus', 'Neptune', 'Pluto']}

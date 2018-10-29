@@ -18,6 +18,10 @@ export default class ImageCard extends Component {
     })
   }
 
+  _onSelectOption(event){
+    console.log('EVENT!: ', this.refs);
+  }
+
   render(){
     return (
       <View>
@@ -30,7 +34,11 @@ export default class ImageCard extends Component {
             style={styles.flatlist}
             data={[...this.props.options]}
             renderItem={({item}) => (
-              <Text style={[styles.flatlistText, this.state.selectedText===item && {backgroundColor: '#eee'}]}>{item}</Text>
+              <Text
+                onPress={() => this._onSelectOption(event)}
+                style={[styles.flatlistText, this.state.selectedText===item && {backgroundColor: '#eee'}]}>
+                {item}
+              </Text>
             )}
           />
         }
