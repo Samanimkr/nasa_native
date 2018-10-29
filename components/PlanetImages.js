@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import axios from 'axios';
 
 import ImageCard from './ImageCard';
@@ -26,7 +26,7 @@ export default class PlanetImages extends Component {
         .get(`https://images-api.nasa.gov/search?q=${this.props.planet}&media_type=image`)
         .then(response => {
             let images_data = [...response.data.collection.items];
-            let planet_images = [], nasa_id = '', image_uri = '', image_data = '';
+            let planet_images = [], nasa_id = '', image_data = '';
             
             for (let index = 0; index < 10; index++) {
                 image_data = images_data[index].data[0];
