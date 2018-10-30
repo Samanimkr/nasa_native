@@ -10,5 +10,5 @@ const persistConfig = { key: 'root', storage };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
-export const store = createStore(persistedReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(logger));
+export const store = createStore(persistedReducer, applyMiddleware(logger));
 export const persistor = persistStore(store);

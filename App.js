@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from "react-navigation";
 
 //Redux imports
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./redux/configureStore";
 
 // Component Imports
-import PlanetImages from './components/PlanetImages';
+import PlanetImages from './views/PlanetImages';
 import Selector from "./components/Selector";
-
 
 export default class App extends Component {
   constructor(){
@@ -19,6 +19,10 @@ export default class App extends Component {
       planet: 'earth'
     }
   }
+
+  // static navigationOptions = {
+  //   header: null
+  // }
 
   render() {
     return (
@@ -48,12 +52,19 @@ export default class App extends Component {
   }
 }
 
+// export default createStackNavigator({
+//   Home: App,
+//   PlanetImages: PlanetImages,
+//   Modal: ImageModal
+// });
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 36,
     flexDirection: 'column',
+    backgroundColor: 'white'
   },
   title: {
     fontSize: 22,

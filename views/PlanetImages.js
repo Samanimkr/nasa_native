@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Button } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import ImageCard from './ImageCard';
+import ImageCard from '../components/ImageCard';
 
 class PlanetImages extends Component {
     constructor(props){
@@ -60,6 +60,10 @@ class PlanetImages extends Component {
 
         return (
             <View style={styles.container}>
+                {/* <Button
+                    title="Go To Home Screen"
+                    onPress={() => this.props.navigation.navigate('Modal')}
+                /> */}
                 { this.state.isDataAvailable &&
                     <FlatList
                         style={styles.flatlist}

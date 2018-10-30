@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, Dimensions, Button } from 'react-native';
 
 export default class ImageModal extends Component {
   render() {
@@ -9,6 +9,11 @@ export default class ImageModal extends Component {
         transparent={this.props.transparent}
         visible={true}>
         <View style={{marginTop: 22}}>
+          {/* <Button
+            title="Go To Planets Screen"
+            onPress={() => this.props.navigation.goBack()}
+          /> */}
+
           <TouchableHighlight
               onPress={this.props.changeVisibility}>
               <Text> &lt; Hide Modal</Text>
