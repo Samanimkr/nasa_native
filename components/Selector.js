@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import { StyleSheet, Text, View, Animated, Easing, FlatList, TouchableHighlight } from 'react-native';
 
+import { changePlanet } from "../redux/actions";
 
-export default class Selector extends Component {
+class Selector extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      selectedText: this.props.defaultValue,
+      selectedText: this.props.planet,
       showMenu: false,
     }
     this.spinValue = new Animated.Value(1);
@@ -26,7 +28,7 @@ export default class Selector extends Component {
       selectedText: option.item,
       showMenu: false
     });
-    this.props.onSelect(option.item);
+    this.props.changePlanet(option.item);
     this.spinArrow();
   }
 
@@ -49,6 +51,8 @@ export default class Selector extends Component {
 
     return (
       <View>
+
+        {/* SELECTOR BUTTON */}
         <TouchableHighlight style={styles.container} onPress={() => this.onPressButton()}>
 
           <View>
@@ -60,6 +64,7 @@ export default class Selector extends Component {
           
         </TouchableHighlight>
 
+        { /* SELECTOR OPTIONS:  */}
         { this.state.showMenu &&
           <FlatList
             style={styles.flatlist}
@@ -80,6 +85,20 @@ export default class Selector extends Component {
   }
 
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+      planet: state.planet
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      changePlanet: (planet) => { dispatch(changePlanet(planet))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Selector);
 
 const styles = StyleSheet.create({
   container: {

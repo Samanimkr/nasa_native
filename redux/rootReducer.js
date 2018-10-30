@@ -4,10 +4,9 @@ const initialState = {
 
 const myReducer = (state = initialState, action) => {
     if (action.type === "CHANGE_PLANET"){
-        let newPlanet = action.planetName;
         return {
             ...state,
-            planet: newPlanet
+            planet: action.planetName
         }
     }
     return state;

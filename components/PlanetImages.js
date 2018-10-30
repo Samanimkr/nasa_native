@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import ImageCard from './ImageCard';
 
-export default class PlanetImages extends Component {
+class PlanetImages extends Component {
     constructor(props){
         super(props);
 
@@ -71,6 +72,14 @@ export default class PlanetImages extends Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        planet: state.planet
+    }
+  }
+  
+export default connect(mapStateToProps)(PlanetImages);
 
 const styles = StyleSheet.create({
     container: {
