@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StyleSheet, View, FlatList, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 import ImageCard from '../components/ImageCard';
+import Selector from "../components/Selector";
 
 class PlanetImages extends Component {
     constructor(props){
@@ -20,6 +21,10 @@ class PlanetImages extends Component {
                 desc: ''
             }],
         }
+    }
+
+    static navigationOptions = {
+        title: 'Planets'
     }
 
     getNasaImages(){
@@ -60,19 +65,28 @@ class PlanetImages extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <Button
-                    title="Go To Home Screen"
-                    onPress={() => this.props.navigation.navigate('Modal')}
-                /> */}
-                { this.state.isDataAvailable &&
-                    <FlatList
-                        style={styles.flatlist}
-                        keyExtractor={item => item.id }
-                        data={this.state.images}
-                        renderItem={image => <ImageCard uri={image.item.uri} title={image.item.title} date={image.item.date} desc={image.item.desc} /> }
-                    />
-                }
+                <Text style={styles.title}>Welcome to NASA Native!</Text>
+
+                <View style={{alignItems:'center', position: 'relative', zIndex: 5}}>
+                <Selector 
+                    // defaultValue="Earth" 
+                    options={['Earth', 'Mars','Saturn', 'Jupiter', 'Uranus', 'Neptune', 'Pluto']}
+                    // onSelect={(value) => this.setState({planet: value})}
+                />
+                </View>
+
+                <View style={styles.imagesContainer}>
+                    { this.state.isDataAvailable &&
+                        <FlatList
+                            style={styles.flatlist}
+                            keyExtractor={item => item.id }
+                            data={this.state.images}
+                            renderItem={image => <ImageCard navigation={this.props.navigation} uri={image.item.uri} title={image.item.title} date={image.item.date} desc={image.item.desc} /> }
+                        />
+                    }
+                </View>
             </View>
+                
         )
     }
 }
@@ -87,9 +101,22 @@ export default connect(mapStateToProps)(PlanetImages);
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f3f3f3',
+        flex: 1,
+        paddingTop: 10,
+        flexDirection: 'column',
+        backgroundColor: '#fff',
         flex: 1,
     },
+    title: {
+        color: '#000',
+        fontSize: 22,
+        textAlign: 'center',
+        margin: 10
+      },
+    imagesContainer: {
+        backgroundColor: '#f3f3f3',
+        flex: 1
+    },  
     flatlist: {
         paddingTop: 10,
         paddingHorizontal: 24,

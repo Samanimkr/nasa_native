@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import { createStackNavigator } from "react-navigation";
 
 //Redux imports
@@ -9,6 +9,7 @@ import { store, persistor } from "./redux/configureStore";
 
 // Component Imports
 import PlanetImages from './views/PlanetImages';
+import ImageModal from './views/ImageInfo';
 import Selector from "./components/Selector";
 
 export default class App extends Component {
@@ -20,30 +21,17 @@ export default class App extends Component {
     }
   }
 
-  // static navigationOptions = {
-  //   header: null
-  // }
+  static navigationOptions = {
+    header: null
+  }
 
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
 
-
-          <View style={styles.container}>
-            <Text style={styles.title}>Welcome to NASA Native!</Text>
-
-            <View style={{alignItems:'center', position: 'relative', zIndex: 5}}>
-              <Selector 
-                // defaultValue="Earth" 
-                options={['Earth', 'Mars','Saturn', 'Jupiter', 'Uranus', 'Neptune', 'Pluto']}
-                // onSelect={(value) => this.setState({planet: value})}
-              />
-            </View>
-            
-            <PlanetImages planet={this.state.planet}/>
-          </View>
-
+            <StatusBar barStyle='light-content' />
+            < RootStack />
           
         </PersistGate>
       </Provider>
@@ -52,32 +40,21 @@ export default class App extends Component {
   }
 }
 
-// export default createStackNavigator({
-//   Home: App,
-//   PlanetImages: PlanetImages,
-//   Modal: ImageModal
-// });
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 36,
-    flexDirection: 'column',
-    backgroundColor: 'white'
+const RootStack = createStackNavigator(
+  {
+    PlanetImages: PlanetImages,
+    Modal: ImageModal
   },
-  title: {
-    fontSize: 22,
-    textAlign: 'center',
-    margin: 10
-  },
-  dropdown: {
-    width: 300,
-    padding: 5,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-    borderRadius: 5, 
-    borderColor: '#aaa', 
-    borderWidth: 2
+  {
+    initialRouteName: 'PlanetImages',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#222',
+      },
+      headerTintColor: '#FFF',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
-});
+);

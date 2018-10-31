@@ -103,6 +103,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Selector);
 const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
+    backgroundColor: 'black'
   },
   flatlist: {
     position: 'absolute',
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#eee',
     borderTopWidth: 0,
-    backgroundColor: 'white',
+    backgroundColor: 'black', //I WAS WORKGIG HERE LAST TRYING TO MAKE THE BOX AROUND THE SELCTOR BLACK
     width: 300,
   },
   flatlistText: {

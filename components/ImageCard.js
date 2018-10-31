@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Modal } from 'react-native';
 
-import ImageModal from "./ImageModal";
+import ImageModal from "../views/ImageInfo";
 
 export default class ImageCard extends Component {
   constructor(){
@@ -21,7 +21,7 @@ export default class ImageCard extends Component {
   render() {
     return (
       <View>
-        <TouchableHighlight onPress={() => this.onChangeVisibility()} style={{marginBottom: 25}} underlayColor='#fff'>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Modal')} style={{marginBottom: 25}} underlayColor='#fff'>
           <View style={styles.card}>
             <Text style={styles.title} numberOfLines={1}>{this.props.title}</Text>
             <Image style={styles.img} onPress={this.onCardPress} source={{uri: this.props.uri}}/>
