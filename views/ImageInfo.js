@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, Dimensions, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 export default class ImageModal extends Component {
-  static navigationOptions = {
-    title: 'Image Title',
-  }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.info.title}`
+  });
 
   render() {
-    return (
-      <View style={{paddingTop: 36}}>
-        <TouchableHighlight
-            onPress={() => this.props.navigation.goBack()}>
-            <Text> &lt; Hide Modal</Text>
-        </TouchableHighlight>
+    const info = this.props.navigation.getParam('info');
 
-        <View style={{ height: Dimensions.get('window').height*0.9, overflow: 'scroll'}}>
-          <Text style={styles.title} numberOfLines={1}>{this.props.title}</Text>
-          <Image style={styles.img} onPress={this.onCardPress} source={{uri: this.props.uri}}/>
-          <Text style={styles.date}>Date created: {this.props.date}</Text>
-          <Text style={styles.desc} numberOfLines={3}>Description: {this.props.desc}</Text> 
+    console.log('info: ', info);
+
+    return (
+      <View>
+
+        <View style={{ height: Dimensions.get('window').height*0.85, overflow: 'scroll'}}>
+          <Text style={styles.title} numberOfLines={1}>{info.title}</Text>
+          <Image style={styles.img} onPress={this.onCardPress} source={{uri: info.uri}}/>
+          <Text style={styles.date}>Date created: {info.date}</Text>
+          <Text style={styles.desc} numberOfLines={3}>Description: {info.desc}</Text> 
         </View>
+
       </View>
     )
   }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from "react-navigation";
 
 //Redux imports
@@ -9,8 +9,7 @@ import { store, persistor } from "./redux/configureStore";
 
 // Component Imports
 import PlanetImages from './views/PlanetImages';
-import ImageModal from './views/ImageInfo';
-import Selector from "./components/Selector";
+import ImageInfo from './views/ImageInfo';
 
 export default class App extends Component {
   constructor(){
@@ -43,7 +42,7 @@ export default class App extends Component {
 const RootStack = createStackNavigator(
   {
     PlanetImages: PlanetImages,
-    Modal: ImageModal
+    ImageInfo: ImageInfo
   },
   {
     initialRouteName: 'PlanetImages',
