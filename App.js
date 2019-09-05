@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from "react-navigation";
 
-//Redux imports
+// Redux imports
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./redux/configureStore";
